@@ -7,6 +7,7 @@
 package com.ambimmort.minatutorial.part1.basic;
 
 import org.apache.mina.core.service.IoHandlerAdapter;
+import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 
 /**
@@ -18,11 +19,13 @@ public class MinaServerHandler extends IoHandlerAdapter {
     @Override
     public void sessionOpened(IoSession session) throws Exception {
         System.out.println(session.getRemoteAddress()+" connected");
+        
     }
 
     @Override
     public void messageReceived(IoSession session, Object message) throws Exception {
         System.out.println("Message Received["+session.getRemoteAddress()+"]: "+message);
+        session.write(message+" back");
     }
 
     @Override
@@ -34,5 +37,11 @@ public class MinaServerHandler extends IoHandlerAdapter {
     public void sessionClosed(IoSession session) throws Exception {
         System.out.println(session.getRemoteAddress()+" closed");
     }
+
+    @Override
+    public void messageSent(IoSession session, Object message) throws Exception {
+        super.messageSent(session, message); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     
 }

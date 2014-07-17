@@ -23,7 +23,10 @@ public class MinaServer {
     
     public static void main(String[] args){
         IoAcceptor acceptor = new NioSocketAcceptor();
+        
         acceptor.getFilterChain().addLast("log", new LoggingFilter());
+        
+        
         acceptor.getFilterChain().addLast("codec", new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("utf-8"))));
         acceptor.setHandler(new MinaServerHandler());
         try {

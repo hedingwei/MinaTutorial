@@ -14,6 +14,7 @@ import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
 import org.apache.mina.filter.firewall.ConnectionThrottleFilter;
 import org.apache.mina.filter.logging.LoggingFilter;
+import org.apache.mina.filter.statistic.ProfilerTimerFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 
 /**
@@ -25,7 +26,7 @@ public class MinaServer {
     public static void main(String[] args){
         IoAcceptor acceptor = new NioSocketAcceptor();
         //连接调节器
-        ConnectionThrottleFilter throttle = new ConnectionThrottleFilter(1000);
+        EnhancedConnectionThrottleFilter throttle = new EnhancedConnectionThrottleFilter(1000,100);
         
         acceptor.getFilterChain().addLast("log", new LoggingFilter());
         acceptor.getFilterChain().addLast("throttle",throttle);

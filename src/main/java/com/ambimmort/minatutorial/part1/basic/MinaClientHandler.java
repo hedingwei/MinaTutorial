@@ -23,7 +23,9 @@ public class MinaClientHandler extends IoHandlerAdapter {
             session.write("hello world from mina client "+i);
         }
         
-        session.close(false);
+        
+        
+//        session.close(false);
     }
 
     @Override

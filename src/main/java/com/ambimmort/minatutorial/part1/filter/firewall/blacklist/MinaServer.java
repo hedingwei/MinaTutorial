@@ -30,6 +30,7 @@ public class MinaServer {
         IoAcceptor acceptor = new NioSocketAcceptor();
         
         acceptor.getFilterChain().addLast("log", new LoggingFilter());
+       
         //tag1:设置黑名单过滤器
         BlacklistFilter filter = new BlacklistFilter();
 

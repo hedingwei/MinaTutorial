@@ -21,9 +21,15 @@ import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 public class MinaServer {
     
     public static void main(String[] args){
+        
         IoAcceptor acceptor = new NioSocketAcceptor();
+        
+        
         acceptor.getFilterChain().addLast("codec", new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("utf-8"))));
+        
         acceptor.setHandler(new MinaServerHandler());
+        
+        
         try {
             acceptor.bind(new InetSocketAddress(8888));
         } catch (IOException ex) {
